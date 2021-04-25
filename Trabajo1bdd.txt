@@ -1,0 +1,62 @@
+create database personas;
+create database automotor;
+use personas;
+create table clientes (DNI int, nombre varchar(50), telefono int, direccion varchar(50));
+insert into clientes (DNI, nombre, telefono, direccion) values (40324435, "Carlos", 33837345, "artigas" 2345);
+create table empleados (DNI int, nombre varchar(50), apellido varchar(50), direccion varchar(50), telefono int; mail varchar(50), cargo varchar(50), edad int);
+insert into empleados (DNI, nombre, apellido, direccion, telefono, mail, cargo, edad) values (39654324, "Juan", "Perez", "Carlos Antonio Lopez 5422", 21454124, "juanperez1@gmail.com", "limpieza",21);
+insert into clientes (DNI, nombre, telefono, direccion) values (33245543, "Jorgito", 22345432, "nazca 3245");
+insert into empleados (DNI, nombre, apellido, direccion, telefono, mail, cargo, edad) values (29432452, "Leonardo", "Meci", "triunvirato 2354", 22346532, "meciento123@gmail.com", "gerente", 41);
+insert into empleados (DNI, nombre, apellido, direccion, telefono, mail, cargo, edad) values (16489723, "Jorge", "Lopez", "costituyentes 4297", 34523566, "jorgonlopez2@gmail.com", "secretario", 69);
+insert into empleados (DNI, nombre, apellido, direccion, telefono, mail, cargo, edad) values (18348575, "Alberto", "Gimenez", "artigas 3248", 45366332, "alberto9@gmail.com", "jefe", 63);
+insert into empleados (DNI, nombre, apellido, direccion, telefono, mail, cargo, edad) values (30432847, "Sofia", "Abila", "Carlos Antonio Lopez 2341", 22867423, "Sofiaaabilaa321@gmail.com", "secretaria", 32);
+insert into clientes (DNI, nombre, telefono, direccion) values (34920592, "Ala", 12424652, "av olazabal 6542");
+insert into clientes (DNI, nombre, telefono, direccion) values (25794623, "ElBicho", 23525272, "av congreso 2342");
+insert into clientes (DNI, nombre, telefono, direccion) values (42572381, "Salmon", 43324231, "san martin 3241");
+
+ 
+
+use automotor;
+create table ambulacias (patente varchar(50), NombreDeChofer varchar(50));
+insert into ambulancias (patente, NombrDeChofer) values ("AG 553 SD", "Carlitos Azucar");
+insert into ambulancias (patente, NombrDeChofer) values ("JF 235 JH", "Juan Gonzales");
+insert into ambulancias (patente, NombrDeChofer) values ("AS 354 GD", "Roberta Perez");
+insert into ambulancias (patente, NombrDeChofer) values ("GD 531 XD", "Rodrigo Perez");
+insert into ambulancias (patente, NombrDeChofer) values ("DQ 778 CX", "Martin Sal);
+
+
+use personas;
+alter table clientes NumeroDeSocio int;
+update clientes set NumeroDeSocio = 923461 where DNI = 40324435;
+update clientes set NumeroDeSocio = 443245 where DNI = 33245543;
+update clientes set NumeroDeSocio = 857673 where DNI = 34920592;
+update clientes set NumeroDeSocio = 1435543 where DNI = 25794623;
+update clientes set NumeroDeSocio = 742327 where DNI = 42572381;
+alter table empleados add NumLegajo int;
+update empleados set NumLegajo = 48445 where DNI = 39654324;
+update empleados set NumLegajo = 6093 where DNI = 29432452;
+update empleados set NumLegajo = 67 where DNI = 16489723;
+update empleados set NumLegajo = 3 where DNI = 18348575;
+update empleados set NumLegajo = 39283 where DNI = 30432847;
+
+use automotor;
+alter table ambulancias add NumeroDeUnidad;
+update ambulancias set NumeroDeUnidad = 22 where = "AG 553 SD";
+update ambulancias set NumeroDeUnidad = 13 where = "JF 235 JH";
+update ambulancias set NumeroDeUnidad = 4 where = "AS 354 GD";
+update ambulancias set NumeroDeUnidad = 31 where = "GD 531 XD";
+update ambulancias set NumeroDeUnidad = 17 where = "DQ 778 CX";
+
+use personas;
+update clientes set direccion = "Calle falsa 123" where nombre = "Carlos";
+update clientes set direccion = "Calle falsa 123" where nombre = "Jorgito";
+update empleados set mail = "hola@gmail.com" where nombre = "Jorge";
+
+use automotor;
+update ambulancias set NombreDeChofer = "Rodolfo" where patente = JF 235 JH;
+
+use personas; 
+delete from empledos where 65<edad; 
+delete from clientes where telefono<40000000;
+delete from clientes where nombre = "equis";
+ 
