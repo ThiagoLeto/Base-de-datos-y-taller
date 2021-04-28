@@ -1,0 +1,24 @@
+1) Esta compuesta en tablas, en donde esas tablas tienen datos
+ 
+2) Una tabla es un conjunto de varibles las cuales se les agregan datos 
+
+3) Se crea con el comando de "create database (nombre de la base de datos)"
+
+4) Se pueden usar el int para los numeros, y el varchar para los nombres
+
+5) Se crea con un (Create table "nombre de la tabla" ("variables")). El nombre de la tabla va en plural.
+
+6) Los datos se insertan con un (insert into "la tabla en la que se quiere ingresar" "(las variables de la tabla que se quieren igresar)" "values" "(los datos que van en las variables)")
+
+7) Se puede hacer con un "select" (select * from "nombre de la tabla")
+
+8) 
+-update personas set nombre = "Favio" where dni = 14235234;
+-update personas set nombre = "Pablo" where edad = 80;
+-update personas set direccion = "holaa 1234" where apellido = "equis";
+-delete from personas where apellido = Gamboa;
+-select * from personas where edad => 18;
+-select * from personas where edad => 18 and nombre = "Roberto";
+-select nombre from personas where apellido = "equis";
+-select edad from personas where apellido = "equis";
+-select * from personas where apellido = "equis" and edad =< 17;
