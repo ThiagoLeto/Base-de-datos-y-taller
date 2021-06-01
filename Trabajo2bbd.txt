@@ -1,0 +1,40 @@
+create database travels;
+use travels;
+create table clientes (id int not null auto_increment primary key, nombre varchar(50), apellido varchar(50), direccion varchar(50), dni int, telefono int);
+create table alojamientos (id int not null auto_increment primary key, nombre varchar(50), categoria varchar(50), direccion varchar(50), telefono int, cantidad_de_personas int, cantidad_de_pisos int);
+create table reservas (id_cliente int, id_alojamiento int, paquete_de_viaje int, fecha_de_inicio varchar(50), fecha_de_fin varchar(50), cantidad_de_personas int, lugar varchar(50), cantidad_de_dias int, cantidad_de_noches int, precio int, cantidad_de_excursiones int, tipo_de_viaje varchar(50));
+
+insert into clientes (nombre, apellido, direccion, dni, telefono) values ("Carlitos", "Garcia", "Carlos antonio lopez 3162", 35389224, 2323-1125),
+ ("Jorge", "Ramirez", "Nazca 4531", 41682518, 3153-1025), ("Carla", "Garciorela", "Triunvirato 5346", 27384620, 4517-2960), ("Juan", "Gimenez", "Nazca 6521", 32058301, 5274-0921),
+ ("Claudia", "Haez", "Mosconi 6144", 29374010, 6234-8252), ("Thiago", "Juarez", "Parque Chacabuco 7543",30314801, 1723-2842), ("Pedro", "Perez","Griveo 4231", 28310478, 3171-5423),
+ ("Antonio", "Gonzalez", "Villa devoto 6211", 34610283, 4612-0912), ("Jose", "Gomez", "Palermo 2451", 19731671, 1931-5721), ("Fernando", "Martinez", "Flores 5412", 41026386, 2242-9421);
+ insert into alojamientos (nombre, categoria, direccion, telefono, cantidad_de_personas, cantidad_de_pisos) values ("Hotel Hilton", "5 estrellas", "Corrientes 1234", 54343434, 1000, 10),
+ ("Hotel Sheraton", "5 estrellas", "Aleos 1234", 53323434, 2000, 20), ("Hotel Pueyrredon", "3 estrellas", "Mosconi 3234", 45713434, 50, 4), ("Hotel Larson", "4 estrellas", "Bermudez 1234", 43456787, 300, 5),
+ ("Hotel aston", "1 estrellas", "Constituyentes 2344", 43456543, 30, 2), ("Hotel Palace", "4 estrellas", "Cabildo 3300", 54453234, 400, 10),
+ ("Hotel Belgrano", "3 estrellas", "Monroe 3234", 54342000, 100, 4), ("Hotel Sol", "2 estrellas", "Belgrano 1234", 54347867, 100, 3),("Hotel Marriot", "5 estrellas", "Libertador 5000", 48765678, 400, 10),
+ ("Hotel Solar", "3 estrellas", "Callao 2330", 56788778, 330, 8), ("Hotel Lopez", "4 estrellas", "Lopez 2134", 58987789, 3, 50);
+ insert into reservas (id_cliente, id_alojamiento, paquete_de_viaje, fecha_de_inicio, fecha_de_fin, cantidad_de_personas, lugar, cantidad_de_dias, cantidad_de_noches, precio, cantidad_de_excursiones, tipo de viaje) values (2, 4, 40, "15/5/2021", "20/5/2021", 2, "Buenos Aires", 4, 3, 1000, 2, "Turismo"), 
+ (4, 3, 42, "10/5/2021", "20/5/2021", 2, "Bariloche", 10, 9, 10000, 5, "Turismo"), (3, 3, 42, "1/5/2021", "20/5/2021", 2, "Bariloche", 20, 19, 20000, 10, "Turismo"), 
+ (5, 6, 41, "15/5/2021", "20/5/2021", 1, "Bariloche", 5, 4, 1000, 0, "Trabajo"), (8, 7, 30, "10/7/2021", "20/7/2021", 1, "Buenos Aires", 10, 9, 5000, 2, "Trabajo"), 
+ (9, 1, 22, "1/7/2021", "4/7/2021", 4, "Buenos Aires", 4, 3, 4000, 1, "Turismo"), (10, 1, 29, "5/5/2021", "5/6/2021", 2, "Buenos Aires", 30, 29, 11000, 1, "Trabajo"),
+ (1, 2, 37, "15/8/2021", "30/8/2021", 3, "Colon", 15, 14, 8000, 6, "Turismo"), (7, 10, 9, "28/5/2021", "17/6/2021", 5, "Iguazu", 20, 19, 20000, 13, "Turismo"),
+ (6, 3, 14, "2/6/2021", "6/6/2021", 1, "CABA", 5, 4, 500, 0, "Trabajo");
+ 
+ select * from clientes;
+ select * from clientes where id = 6;
+ select nombre, apellido, telefono from clientes where apellido like 'Gar%';
+ select nombre, apellido, telefono from clientes where apellido like '%ez';
+ select nombre, apellido, telefono from clientes where apellido like '%ar%';
+ update clientes set direccion = "San Juan 1234" where id = 10;
+ delete from clientes where id = 10;
+ select paquete_de_viaje from reservas where cantidad_de_excursiones<=3 order by lugar;
+ select paquete_de_viaje from reservas where cantidad_de_excursiones<=3 order by cantidad_de_dias desc;
+ select paquete_de_viaje from reservas where precio<=6000 and cantidad_de_dias=2;
+ select * from reservas where fecha_de_inicio between "1/5/2021" and "10/5/2021" order by fecha_de_inicio desc;
+ delete from reservas where id_cliente=10;
+ update alojamientos set direccion = "Belgrano 15897" where id = 3;
+ select * from reservas where cantidad_de_personas <= 2 and fecha_de_inicio between "1/4/2021" and "30/4/2021";
+ delete from clientes where id = 6;
+ update reservas set cantidad_de_dias = 8 and cantidad_de_noches = 7  where lugar = "Bariloche";
+ 
+ 
