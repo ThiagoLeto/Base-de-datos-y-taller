@@ -1,0 +1,32 @@
+create database empresa_vi_sc;
+use empresa_vi_sc;
+create table clientes (id_cliente int auto_increment primary key, nombre varchar(50), direccion varchar(50), telefono int, fax int, mail varchar(50), website varchar(50), contacto varchar(50));
+create table productos (codigo_producto int, descripcion varchar(50), stock int, precio_unitario int, stock_minimo int);
+create table proveedores (id_proveedor int auto_increment primary key, cuil int, razon_social varchar(50), direccion varchar(50), telefono int, fax int, mail varchar(50), website varchar(50), contacto varchar(50));
+create table facturacion (id_factura int auto_increment primary key, codigo int, producto varchar(50), cantidad int, fecha date, id_proveedor int);
+insert into clientes (nombre, direccion, telefono, fax, mail, website, contacto) values ("Carlos Almeda", "Nazca 5423", 42365609, 63864380, "almadaa22@gmail.com", "www.foodonline.com", "Juan Gimenez"), 
+("Jorge Rivera", "Constituyentes 3278", 27261400, 90180201, "riverajorge@gmail.com", "No tiene", "Alberto más"), ("Thiago Azucar", "Triunvirato 3198", 72938193, 72835160, "Elthiagoos@gmail.com","www.buymarket.com", "Edinson Cavani"),
+("Bernardo Almendra", "Palermo 5163", 15027385, 223779104, "berndd123@gmail.com", "No tiene", "Lilian Perez"), ("Julian Lopez", "Carlos Antonio Lopez 6153", 78122637, 67115266, "lopezzz787@gmail.com", "www.store-on.com", "Roberto Banderas");
+insert into productos (descripcion, stock, precio_unitario, stock_minimo) values ( "Muy rico", 447, 226, 1), ("Mala presentacion", 1203, 105, 2),
+("Muy barato", 1123, 58, 3), ("Caro por lo que es", 234, 165, 2), ("Bastante feo", 556, 72, 0); 
+insert into proveedores (cuil, Razon_social, direccion, telefono, fax, mail, website) values (77345678 , "Vender" , "Nazca 3168", 27383716, 76543210, "Jose@gmail.com", "www.buymarket.com"),
+(45678970, "Vender", "Constituyentes 7623", 111335274, 76543211, "Mat2351@gmail.com", "www.products.com"), (92535678, "Vender", "Triunvirato 2378", 62718364, 76543212, "Pepe@gmail.com", "www.sell.com"),
+(39145578, "Vender", "Palermo 8723", 998715230, 76543213, "Jorgito@gmail.com", "www.foodonline.com"), (15445678, "Vender", "Carlos Antonio Lopez 2387", 36142834, 76543214, "Atos@gmail.com", "www.store-on.com");
+INSERT INTO facturacion (Codigo, Producto, Cantidad, Fecha, ID_Proveedor) values (5365, "Durazno", 1, "2019-09-28", 1), (6834, "Atun" , 2, "2019-09-06", 1), 
+(3726 , "Arvejas" , 3 , "2019-09-14" , 2 ), (2572 , "Atun" , 4 , "2019-09-22" , 4), (2345 , "Palmitos" , 11 , "2019-09-18" , 5);
+select*from productos where Stock_minimo >3;
+select*from productos where Precio_unitario>20 and Precio_unitario<100;
+select*from clientes where Website!="No tiene";
+delete from proveedores where ID_proveedor=10;
+update proveedores set direccion = "San Martin 12345"  where ID_proveedor=3;
+select Producto, Fecha from facturacion  where Fecha="2017-04-01";
+select Producto,ID_Proveedor FROM facturacion  where ID_Proveedor=1;
+select Producto,Codigo,ID_Proveedor FROM facturacion  where ID_Proveedor=5 AND Cantidad>10;
+select stock from productos;
+select max(Precio_unitario) from productos;
+select Codigo_producto,Precio_unitario from productos where Precio_unitario=(SELECT MAX(Precio_unitario) from productos);
+select min(Precio_unitario) from productos;
+select Codigo_producto,Precio_unitario from productos where Precio_unitario=(SELECT MIN(Precio_unitario) from productos);
+select AVG(Precio_unitario) from productos;
+select sum(stock) from productos;
+select sum(stock) from productos where Precio_unitario<(SELECT AVG(Precio_unitario) from productos);
