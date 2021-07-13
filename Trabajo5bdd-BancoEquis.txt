@@ -1,0 +1,16 @@
+create database bancoequis;
+use bancoequis;
+create table empleados (id_empleado int auto_increment primary key, id_departamento int, puesto varchar(50), nombre varchar(50), apellido varchar(50) not null,dni int, salario int);
+create table departamentos (id_departamentos int, nombre varchar(50), cantidad_de_empleados int, nombre_director varchar(50));
+
+insert into empleados (id_departamento, puesto, nombre, apellido, dni, salario) values  (1, "empleado", "david", "austin", 731426756, 200), (2, "empleado", "Paul", "Pogba", 123456781, 120.000),
+(3, "empleado", "Ngolo", "Kante", 421426756, 125.000), (4, "empleado", "Oliver", "Giroud", 892556783, 75.000), (1, "conserje", "Kylian", "Mbappe", 224156784, 110.000),
+(2, "conserje", "Antoine", "Griezmann", 331795585, 110.000);
+insert into departamentos (id_departamentos, nombre, cantidad_de_empleados, nombre_director) values (1, "ventas", 186, "Juan Jose Mende"), 
+(2, "sistemas", 62, "Pablito Gonzalez"), (3, "finanzas", 150, "El gordo Jorge"), (4, "marketing", 19 , "Joao Brazuc"), (5, "administracion", 13, "Jorge Gimenez");
+
+select * from empleados where id_departamento = (select id_departamentos from departamentos where nombre="marketing");
+select nombre, apellido, dni from empleados where salario < (select avg(salario) from empleados);
+select nombre, apellido, dni from empleados where salario < (select avg(salario) from empleados) and id_departamento=(select id_departamentos from departamentos where nombre="ventas");
+select nombre, apellido, dni from empleados where puesto = (select puesto from empleados where nombre="david" and apellido="austin");
+select nombre, apellido, dni from empleados where id_departamento = (select id_departamentos from departamentos where nombre="sistemas");
