@@ -1,0 +1,7 @@
+/*1*/ select lugar, cant_dias, cant_noches, id_alojamiento, costo from paquete_de_viaje A, alojamiento B  where costo<(select avg(costo) from paquete_de_viaje) order by costo;
+/*2*/ update paquete_de_viaje set cant_dias=10, cant_noches=9  where costo>(select avg(costo) from paquete_de_viaje);
+/*3*/ select costo, id_paquete_viaje, lugar from paquete_de_viaje where costo>(select avg(costo) from paquete_de_viaje);
+/*4*/ select id_cliente from clientes where id_cliente not in (select id_cliente from pago)  
+/*5*/ delete from paquete_de_viaje where id_paquete_viaje not in (select id_paquete_viaje from reservas); 
+/*6*/ select id_paquete_viaje, lugar from paquete_de_viaje where id_paquete_viaje in (select id_paquete_viaje from reservas);
+/*7*/ select min(id_cliente), max(id_cliente), avg(id_cliente) from reservas group by id_cliente;
