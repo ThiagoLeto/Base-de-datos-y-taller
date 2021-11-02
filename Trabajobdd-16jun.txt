@@ -1,0 +1,29 @@
+create database Empresa;
+use Empresa;
+
+create table empleados(DNI int, Apellido varchar(50), Nombre varchar(50), Domicilio varchar(50), Sector varchar(50), TelefonoParticular int, NumeroInterno int, Celular int, EstadoCivil varchar(50), Hijos int, FechaDeNacimiento date, FechaIngreso date);
+create table sueldos(Basico int, Retenciones int, Asignaciones int, Comisiones int, Mes int, SueldoNeto int);
+create table productos(Descripcion varchar(50), Stock int, StockMinimo int, PrecioCosto int, PrecioVenta int, Demora time);
+create table ControlHoras(Fecha date, HoraInicio time, HoraFinal time);
+
+insert into empleados(DNI, Apellido, Nombre, Domicilio, Sector, TelefonoParticular, NumeroInterno, Celular, EstadoCivil, Hijos, FechaDeNacimiento, FechaIngreso) values(22383728, "Ramirez", "Jorge", "Constituyentes 1131", "Sistemas", 1278229, 34, 91783733, "Casado", 0, "1979-02-06", "2000-08-19");
+insert into empleados(DNI, Apellido, Nombre, Domicilio, Sector, TelefonoParticular, NumeroInterno, Celular, EstadoCivil, Hijos, FechaDeNacimiento, FechaIngreso) values(23528928, "Lopez", "Carlos", "Constituyentes 1131", "Ventas", 2368373, 2, 23948984, "Soltero", 1, "1965-01-28", "1995-01-28");
+insert into empleados(DNI, Apellido, Nombre, Domicilio, Sector, TelefonoParticular, NumeroInterno, Celular, EstadoCivil, Hijos, FechaDeNacimiento, FechaIngreso) values(12539723, "Sal", "Johnny", "Constituyentes 1131", "Marketing", 5283273, 12, 12438935, "Casado", 2, "1972-12-27", "2008-12-01");
+
+insert into sueldos(Basico, Retenciones, Asignaciones, Comisiones, Mes, SueldoNeto) values(25560, 900, 3500, 8192, 6, 40000);
+insert into sueldos(Basico, Retenciones, Asignaciones, Comisiones, Mes, SueldoNeto) values(76456, 2500, 9930, 6123, 9, 55000);
+insert into sueldos(Basico, Retenciones, Asignaciones, Comisiones, Mes, SueldoNeto) values(32172, 2100, 5275, 9000, 12, 60000);
+
+insert into productos(Descripcion, Stock, StockMinimo, PrecioCosto, PrecioVenta, Demora) values("Celular", 300, 4, 60000, 70000, "72:00:00");
+insert into productos(Descripcion, Stock, StockMinimo, PrecioCosto, PrecioVenta, Demora) values("Computadora", 110, 5, 80000, 100000, "15:30:00");
+insert into productos(Descripcion, Stock, StockMinimo, PrecioCosto, PrecioVenta, Demora) values("Pelota", 680, 30, 800, 1000, "06:00:00");
+
+insert into ControlHoras(Fecha, HoraInicio, HoraFinal) values("2020-09-17", "08:01:40", "18:30:17");
+insert into ControlHoras(Fecha, HoraInicio, HoraFinal) values("2020-10-18", "08:30:59", "19:31:00");
+insert into ControlHoras(Fecha, HoraInicio, HoraFinal) values("2021-05-01", "10:45:19", "18:21:12");
+
+select * from empleados where year(FechaIngreso) = year("1995-01-01");
+select * from empleados where month(FechaDeNacimiento) = month("1995-10-01");
+select * from empleados where day(FechaDeNacimiento) < day("1995-01-16") and month(FechaDeNacimiento) = month("1995-01-16");
+select * , year(from_days(datediff("2021-06-16", FechaIngreso))) from empleados;
+select *, time(demora + current_time())from productos where stock <= stockMinimo;
