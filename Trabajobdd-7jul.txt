@@ -1,0 +1,89 @@
+// UNO
+
+create database investigaciones;
+use investigaciones;
+
+create table facultades(Código int, NombreF varchar(50));
+create table investigadores(DNI_I int, NombreI varchar(50), FacultadI varchar(50));
+create table reservas(DNI_R int, NroSerie_R int, Comienzo date, Fin date);
+create table equipos(NroSerie_E int, NombreE varchar(50), FacultadE varchar(50));
+
+insert into facultades(Código, NombreF) values(824156, "UTN");
+insert into facultades(Código, NombreF) values(277116, "UBA");
+insert into facultades(Código, NombreF) values(756823, "MSN");
+insert into facultades(Código, NombreF) values(352565, "BBC");
+
+insert into reservas(DNI_R, NroSerie_R, Comienzo, Fin) values(5215133, 4, "2021-03-11", "2020-09-01");
+insert into reservas(DNI_R, NroSerie_R, Comienzo, Fin) values(2566521, 2, "2020-02-09", "2020-07-02");
+insert into reservas(DNI_R, NroSerie_R, Comienzo, Fin) values(7431151, 8, "2019-12-16", "2020-06-10");
+insert into reservas(DNI_R, NroSerie_R, Comienzo, Fin) values(8275214, 7, "2021-04-28", "2021-10-19");
+
+insert into investigadores(DNI_I, NombreI, FacultadI) values(5126521, "Carlos Perez", "UBA");
+insert into investigadores(DNI_I, NombreI, FacultadI) values(4385214, "Jorge Lopez", "ITBA");
+
+insert into equipos(NroSerie_E, NombreE, FacultadE) values(2, "uuu", "UBA");
+insert into equipos(NroSerie_E, NombreE, FacultadE) values(2, "bbb", "UBA");
+insert into equipos(NroSerie_E, NombreE, FacultadE) values(8, "ccc", "UTN");
+insert into equipos(NroSerie_E, NombreE, FacultadE)  values(7, "aaa" ,"UTN");
+insert into equipos(NroSerie_E, NombreE, FacultadE) values(3, "iii", "UTN");
+
+
+select DNI_I, NombreI, FacultadI, NroSerie_E, NombreE, FacultadE, Comienzo, Fin from reservas, investigadores, equipos where DNI_I = DNI_R;
+
+select DNI_I, NombreI from investigadores where DNI_I =(select DNI_R from reservas where NroSerie_R =(select NroSerie_E from equipos where FacultadE is null));
+
+select NombreF from facultades where NombreF not in(select FacultadI from investigadores);
+
+select FacultadI from investigadores where DNI_I not in(select DNI_R from reservas);
+
+select NroSerie_E, NombreE from equipos where NroSerie_E not in(select NroSerie_R from reservas);
+
+
+
+
+// DOS
+
+create database emprendimiento;
+
+use emprendimiento;
+
+create table articulos(codigoArticulo int, descripcion varchar(50), precio float, stock int);
+create table facturas(codigoFacturas int, fecha date, descuento float, iva int);
+create table pueblos(codigoPueblo int, Nombre varchar(50));
+create table clientes(codigoPueblo int, Nombre varchar(50), codigoPostal varchar(50));
+create table vendedores(codigoVendedor int, Nombre varchar(50));
+
+insert into articulos(codigoArticulo, descripcion, precio, stock) values(78928, "Perfume", 1500, 14);
+insert into articulos(codigoArticulo, descripcion, precio, stock) values(18392, "Post-its", 782, 7);
+
+insert into facturas(CodigoFacturas, fecha, descuento, iva) values(91092, "2020-08-26", 25, 30);
+insert into facturas(CodigoFacturas, fecha, descuento, iva) values(81933, "2021-03-05", 0, 28);
+
+insert into pueblos(codigoPueblo, Nombre) values(89751, "Bariloche");
+insert into pueblos(codigoPueblo, Nombre) values(19823, "Parque chacabuco");
+
+insert into clientes(codigoPueblo, Nombre, codigoPostal) values(91822, "Juan Meci", "18.2191.2");
+insert into clientes(codigoPueblo, Nombre, codigoPostal) values(19823, "Carlos Perez", "21.2773.221");
+
+insert into vendedores(codigoVendedor, Nombre) values(12161, "Jorge Lopez");
+insert into vendedores(codigoVendedor, Nombre) values(22076, "Johnny Albaca");
+
+
+
+select codigoArticulo, precio from articulos where precio =(select max(precio) from articulos);
+
+select codigoArticulo, precio from articulos where precio >(select avg(precio) from articulos);
+ 
+select codigoFacturas, fecha from facturas where descuento =(select max(descuento) from facturas) and iva =(select max(iva) from facturas);
+
+select codigoPueblo, Nombre from clientes where codigoPueblo in(select codigoPueblo from pueblos);
+
+select * from vendedores where codigoVendedor =(select codigoFacturas from facturas where iva = 16);
+
+select count(codigoArticulo) from articulos where precio > (select max(precio) *100 / 55 from articulos);
+
+select CodigoFacturas, fecha from facturas where descuento > 0; -- No se puede compartir el codigo postal con el codigo de las facturas.
+
+select count(codigoPueblo) from pueblos where codigoPueblo not in(select CodigoPueblo from clientes);
+
+select count(codigoArticulo) from articulos where stock > 20 and precio > 25;
