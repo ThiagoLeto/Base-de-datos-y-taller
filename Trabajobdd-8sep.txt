@@ -1,0 +1,12 @@
+
+select lugar, cantDias, cantNoches, costo, nombre from paquetesViajes, alojamientos where costo = (select min(costo) from paquetesViajes) and nombre = (select nombre from alojamientos where idAlojamiento =(select idAlojamiento from paquetesViajes));
+
+update paquetesViajes set cantDias = 10, cantNoches = 9 where costo =(select max(costo) from paquetesViajes);
+
+select idPaqueteDeViajes, lugar, costo from paquetesViajes where costo >(select avg(costo) from paquetesViajes);
+
+select apellidoNombre from clientes where idCliente =(select idCliente from pagos where montoDecimal is null or montoDecimal = 0);
+
+delete from paquetesViajes where idPaqueteDeViajes not in(select idPaqueteDeViajes from reservas);
+
+select idPaqueteDeViajes, lugar from paquetesViajes where idPaqueteDeViajes in(select idPaqueteDeViajes from reservas);
