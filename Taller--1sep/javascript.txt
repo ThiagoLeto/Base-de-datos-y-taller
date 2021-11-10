@@ -1,0 +1,71 @@
+function ObtenerValorApariciones(){
+    let numero = 0;
+    numero = document.getElementById('Numero').value;
+    let resultado = cantApariciones(numero);
+    return resultado;
+}
+
+function ObtenerValorMail(){
+    let email = document.getElementById('email').value;
+    let resultado = posibleMailValido(email);
+    return resultado;
+}
+
+function ObtenerValorTelefono(){
+    let tel = document.getElementById('telefono').value;
+    let resultado = posibleMailValido(tel);
+    return resultado;
+}
+
+function cantApariciones(N) {
+    let arreglo = [1, 2, 3, 1, 5];
+    let contador = 0;
+
+    for(let i = 0; i < arreglo.length; i++){
+        if(arreglo[i] == N) {
+            contador ++;
+        }
+    }
+
+    console.log("Este numero se encuentra " + contador + " veces");
+    return 1;
+}
+
+function posibleMailValido(email){
+    let verificador = 0;
+    let a = '@';
+    for(let i = 1; i < (email.length - 1); i++){
+        if(email[i] == a) verificador++;
+    }
+
+    if(verificador != 0) console.log("El email es correcto");
+    else console.log("El email ingresado es incorrecto");
+    return 2;
+}
+
+function posibleTelefonoValido(t){
+    let contadorPrimerosNumeros = 0;
+    let i = 0;
+
+    for(i; i < 3; i++){
+        if(t[i] == 1 || t[i] == 0) contadorPrimerosNumeros++;
+    }
+
+    let verificadorLength = 0;
+    for(i; i < t.length; i++){
+        verificadorLength ++;
+    }
+    if(verificadorLength == 7 && contadorPrimerosNumeros == 2) console.log("true");
+    else if(verificadorLength == 8 && contadorPrimerosNumeros == 3) console.log("true");
+    else console.log("False");
+    return 3;
+}
+
+function asignarValor(valor,id){
+    let aux = 0;
+
+    aux = id;
+    id = valor;
+    valor = aux;
+    console.log("Usted uso la funcion " + valor +", que tiene el valor de " + id);
+}
