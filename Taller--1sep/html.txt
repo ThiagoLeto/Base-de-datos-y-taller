@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="Ejercitacion.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<form>
+    <p>Ingrese Numero: </p>
+    <input type="number" id="Numero">
+    <button onclick="ObtenerValorApariciones()">Ingrese</button>
+
+
+    <p>Ingrese email: </p>
+    <input type="text" id = "email">
+    <button onclick="ObtenerValorMail()">Ingrese</button>
+
+    <p>Ingrese Telefono: </p>
+    <input type="number" id = "telefono">
+    <button onclick="ObtenerValorTelefono()">Ingrese</button>
+
+    <script>
+        let resultadoObtenidoApariciones = ObtenerValorApariciones();
+        let idApariciones = cantApariciones();
+        asignarValor(resultadoObtenidoApariciones, idApariciones);
+
+        let resultadoObtenidoEmail = ObtenerValorMail();
+        let idMail = posibleMailValido();
+        asignarValor(resultadoObtenidoEmail, idMail);
+
+        let resultadoObtenidoTel = ObtenerValorTelefono();
+        let idTel = posibleTelefonoValido();
+        asignarValor(resultadoObtenidoTel, idTel);
+
+
+    </script>
+</form>
+
+</body>
+</html>
