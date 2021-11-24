@@ -1,0 +1,46 @@
+function obtenerValor1(){
+    let numero = 0;
+    numero = document.getElementById('numero1').value;
+    return numero;
+}
+
+function obtenerValor2(){
+    let numero = 0;
+    numero = document.getElementById('numero2').value;
+    return numero;
+}
+
+function suma(n1, n2){
+    let sum = parseInt(n1) + parseInt(n2);
+    console.log("Suma: " + sum);
+    document.getElementById("Datos").innerHTML = "Suma: " + sum;
+    return sum;
+}
+
+function resta(n1, n2){
+    let res = parseInt(n1) - parseInt(n2);
+    console.log("Resta: " + res);
+    document.getElementById("Datos").innerHTML = "Resta: " + res;
+    return res;
+}
+
+function multiplicacion(n1, n2){
+    let multi = parseInt(n1) * parseInt(n2);
+    console.log("Multiplicacion: " + multi);
+    document.getElementById("Datos").innerHTML = "Multiplicacion: " + multi;
+    return multi;
+}
+
+function division(n1, n2){
+    if(n2 == 0) document.getElementById("Datos").innerHTML = "No se puede dividir un numero por 0";
+    else{
+        let div = parseInt(n1) / parseInt(n2);
+        console.log("Division: " + div);
+        document.getElementById("Datos").innerHTML = "Division: " + div;
+    }
+    return div;
+}
+
+function borrarDatos(){
+    document.getElementById("Datos").innerHTML = "   ";
+}

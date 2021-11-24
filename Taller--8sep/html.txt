@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src = "js.js"></script>
+</head>
+<body>
+
+<p>Ingrese un nro: </p>
+<input type="number" id="numero1">
+<button onclick="obtenerValor1()">Ingrese</button>
+<p>Ingrese otro Nro</p>
+<input type="number" id="numero2">
+<button onclick="obtenerValor2()">Ingresar</button>
+
+<div>
+    <button onclick="suma(obtenerValor1(), obtenerValor2())"> + </button>
+    <button onclick="resta(obtenerValor1(),obtenerValor2())"> - </button>
+    <button onclick="multiplicacion(obtenerValor1(), obtenerValor2())"> * </button>
+    <button onclick="division(obtenerValor1(), obtenerValor2())"> / </button>
+    <button onclick="borrarDatos()">BORRAR</button>
+</div>
+
+<p id = "Datos"></p>
+
+</body>
+</html>
