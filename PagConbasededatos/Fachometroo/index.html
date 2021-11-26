@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Fachometro</title>
+<meta name="viewport" content="user-scalable=no,width=device-width"/>
+
+<link rel="stylesheet" href="style.css">
+
+<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+<body style="margin:30px">
+
+<div class="container">
+	
+<div class="row">
+<div class="formulario">
+<form>
+	<h4>Fromulario Fachometro</h4>	
+	<legend>Ingrese su nombre: </legend>
+		<input type="text" class="form-control" name="" id="item">
+		<br>
+		<br>
+		<legend>Ingrese nivel de facha: </legend>
+		<input type="number" class="form-control" id="quantity" name="">
+<br>
+<br>
+<br>
+<button type="button" id="insert" class="btn btn-success">Insertar en la tabla</button>
+<br><br>
+<button type="button" id="create" class="btn btn-success">Crear Tabla</button>
+<br><br>
+<button type="button" id="remove" class="btn btn-danger">Borrar Tabla</button>
+<br><br>
+<button type="button" id="list" class="btn btn-success">Actualizar Tabla</button>
+</form>
+</div>
+<br><br>
+<hr>
+<div class="tablarda">
+<h4 style="padding: 10px;">Tabla: </h4>
+<h4 style="padding-left: 10px;">-ID-----------Nombre----------------------------Porcentaje--------Configurar---</h4>
+<table class="table table-bordered table-hover" id="itemlist">
+	
+</div>
+
+
+</div>
+
+</div>
+
+
+<script	 type="text/javascript">
+
+var db=openDatabase("itemDB","1.0","itemDB",65535); 
+
+$(function(){
+
+loadData(); 
+
+
+$("#create").click(function(){
+db.transaction(function(transaction){
+	var sql="CREATE TABLE items "+
+	"(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"+
+	"item VARCHAR(100) NOT NULL,"+
+	"quantity INT(5) NOT NULL)";
+	transaction.executeSql(sql,undefined,function(){
+		alert("Se ha creado la tabla");
+	},function(){
+		alert("Ya se creo la tabla");
+	})
+});
+});
+
+
+
+$("#remove").click(function(){
+
+if(!confirm("Estas seguro de borrar la tabla?","")) return;;
+db.transaction(function(transaction){
+	var sql="DROP TABLE items";
+	transaction.executeSql(sql,undefined,function(){
+		alert("Se ha borrado la tabla")
+	},function(transaction,err){
+		alert(err.message);
+	})
+});
+});
+
+
+$("#insert").click(function(){
+var item=$("#item").val();
+var qty=$("#quantity").val();
+db.transaction(function(transaction){
+var sql="INSERT INTO items(item,quantity) VALUES(?,?)";
+transaction.executeSql(sql,[item,qty],function(){
+	alert("Se ha agregado");
+},function(transaction,err){
+	alert(err.message);
+})
+})
+})
+
+
+$("#list").click(function(){
+loadData();
+})
+
+
+function loadData(){
+		$("#itemlist").children().remove();
+	db.transaction(function(transaction){
+		var sql="SELECT * FROM items ORDER BY id DESC";
+		transaction.executeSql(sql,undefined,function(transaction,result){
+if(result.rows.length){
+
+for(var i=0;i<result.rows.length;i++){
+	var row=result.rows.item(i);
+	var item=row.item;
+	var id=row.id;
+	var quantity=row.quantity;
+	$("#itemlist").append('<tr id="del'+id+'"><td>'+id+'</td><td>'+item+'</td><td id="newqty'+id+'">'+quantity+'</td><td><a href="#" class="btn btn-danger deleteitem" data-id="'+id+'">Borrar</a> <a href="#" class="btn btn-primary updateitem" data-id="'+id+'">Actualizar</a></td></tr>');
+}
+}else{
+	$("#itemlist").append('<tr><td colspan="3" align="center">No Item Found</td></tr>');
+}
+		},function(transaction,err){
+			alert('No se encontro una tabla. Apreta en "Crear Tabla" para crear una');
+		})
+	})
+
+
+
+setTimeout(function(){
+	$(".deleteitem").click(function(){
+var sure=confirm("Estas seguro de borrarlo?");
+if(sure===true){
+	var id=$(this).data("id");
+db.transaction(function(transaction){
+var sql="DELETE FROM items where id=?";
+transaction.executeSql(sql,[id],function(){
+	$("#del"+id).fadeOut();
+	alert("Se ha borrado");
+},function(transaction,err){
+	alert(err.message);
+})
+});
+}
+})
+
+$(".updateitem").click(function(){
+var qty=prompt("Ingresa el nuevo valor del nivel de facha",1);
+if(qty!==null){
+	var id=$(this).data("id");
+db.transaction(function(transaction){
+var sql="UPDATE items SET quantity=? where id=?";
+transaction.executeSql(sql,[qty,id],function(){
+	$("#newqty"+id).html(qty);
+	alert("Se ha actualizado");
+},function(transaction,err){
+	alert(err.message);
+})
+});
+}
+})
+
+},1000);
+
+}
+
+
+});
+
+
+
+
+</script>
+
+</body>
+</html>
