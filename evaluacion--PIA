@@ -1,0 +1,39 @@
+/*1*/ select viajes.id_chofer, choferes.nombre, viajes.fecha, viajes.count(id_viaje) from viajes 
+inner join choferes on viajes.id_chofer = choferes.id_chofer 
+group by viajes.id_chofer, choferes.nombre, viajes.fecha;
+
+/*2*/ select choferes.nombre, autos.patente, viajes.costo, viajes.id_auto from choferes 
+inner join viajes on choferes.id_chofer = viajes.id_chofer 
+inner join autos on viajes.id_auto = autos.id_auto where viajes.id_chofer = 1
+group by choferes.nombre, autos.patente, viajes.costo, viajes.id_auto; 
+ 
+/*3*/ select id_viajes, count(id_viajes) from viajes group by id_viajes, fecha, id_chofer;
+
+/*4*/ select id_chofer, sum(costo) from viajes where fecha = "2021-12-1" group by id_chofer;
+
+/*5*/ select sum(costo) from viajes where (fecha = "2021-12-01" and cuenta_corriente = false) or (cuenta_corriente = true and fecha_cobro = "2021-12-01"); 
+
+/*6--no hacer*/
+
+/*7*/ select fecha, sum(costo) from viajes where (id_chofer = 1 and fecha_cobro = null) group by fecha;
+
+/*8--no hacer*/ 
+
+/*9*/ select patente, modelo from autos where id_auto not in (select id_auto from viajes);
+
+/*10*/ select viajes.fecha, viajes.destino, viajes.costo, choferes.nombre,clientes.nombre from clientes
+inner join viajes on clientes.id_cliente = viajes.id_cliente
+inner join choferes on viajes.id_chofer = choferes.id_chofer order by fecha and destino;
+
+/*11*/ select viajes.fecha, viajes.destino, viajes.costo, clientes.nombre from viajes
+inner join clientes on viajes.id_cliente = clientes.id_cliente
+where fecha_cobro = null order by clientes.nombre;
+
+/*12*/ select clientes.nombre, autos.patente, autos.modelo from clientes 
+inner join viajes on clientes.id_cliente = viajes.id_cliente 
+inner join autos on viajes.id_auto = autos.id_auto 
+where fecha between "2018-07-01" and "2018-7-30" order by clientes.nombre; 
+
+/*13*/ select choferes.nombre, viajes.fecha, viajes.destino from viajes
+inner join choferes on viajes.id_chofer = choferes.id_chofer 
+where viajes.fecha between "2018-08-01" and "2018-09-30";
